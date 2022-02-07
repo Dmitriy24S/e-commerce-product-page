@@ -48,9 +48,12 @@ nav {
   width: 100%;
   border-radius: 10px;
 }
+.arrow-wrapper {
+  position: relative;
+}
 .left-arrow {
   position: absolute;
-  top: 198px;
+  top: 50%;
   left: 16px;
   padding: 0.8rem 0.85rem;
   background: rgba(255, 255, 255, 0.922);
@@ -59,7 +62,7 @@ nav {
 }
 .right-arrow {
   position: absolute;
-  top: 198px;
+  top: 50%;
   right: 16px;
   padding: 0.8rem;
   background: rgba(255, 255, 255, 0.922);
@@ -130,6 +133,53 @@ nav {
   box-shadow: 0 23px 25px -17px hsl(26deg 100% 55%);
 }
 
+/* Fullscreen image */
+.fullscreen-image-overlay {
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5rem;
+}
+.fullscreen-image-overlay .image-container {
+  min-width: 500px;
+  min-height: 500px;
+  max-height: 60vh;
+  max-width: 60vw;
+  padding: 0;
+  aspect-ratio: 1;
+}
+.fullscreen-image-overlay .product-image {
+  max-width: none;
+  max-height: none;
+}
+.fullscreen-image-overlay .image-previews {
+  max-width: 25rem;
+}
+.fullscreen-img-close-btn2 {
+  margin-left: auto;
+  margin-bottom: 1.5rem;
+  width: 21px;
+  transform: scale(1.5);
+  cursor: pointer;
+}
+.fullscreen-img-close-btn2 path {
+  fill: orange;
+}
+/* hide fullscreen img overlay mobile */
+.fullscreen-image-overlay {
+  display: none;
+}
+
 /* ============================ */
 /*      Tablet / Desktop       */
 /* =========================== */
@@ -183,6 +233,11 @@ nav {
     flex-direction: column;
     gap: 0.4rem;
   }
+
+  /* fullscreen img overlay  */
+  .fullscreen-image-overlay {
+    display: flex;
+  }
 }
 
 @media (min-width: 948px) {
@@ -197,7 +252,7 @@ nav {
 
 @media (min-width: 1124px) {
   main {
-    padding: 5rem 10rem;
+    padding: 5rem 8rem;
     gap: 4rem;
     justify-content: center;
   }
