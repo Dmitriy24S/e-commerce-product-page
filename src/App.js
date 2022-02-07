@@ -18,6 +18,8 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cartAmount, setCartAmount] = useState(0);
   const [isImageFullscreen, setIsImageFullscreen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCartEmpty, setIsCartEmpty] = useState(false);
 
   const prevSlide = () => {
     setCurrentIndex(currentIndex === 0 ? ProductData[0].images.length - 1 : currentIndex - 1);
@@ -61,7 +63,12 @@ function App() {
         </div>
         {/* Right Header */}
         <div className="header-right flex items-center gap-4 p-2 pt-4 pb-5 sm:p-10 sm:pt-4 sm:pb-5">
-          <img src={CartIcon} className="cursor-pointer" alt="cart" />
+          <img
+            src={CartIcon}
+            className="cursor-pointer"
+            alt="cart"
+            onClick={() => setIsCartOpen(!isCartOpen)}
+          />
           <img src={CustomerIcon} alt="customer" className="w-6 cursor-pointer" />
         </div>
       </header>
@@ -232,6 +239,48 @@ function App() {
           </div>
         )}
         {/* end fullscreen image overlay */}
+
+        {/* cart overlay */}
+        {isCartOpen && (
+          <div className="cart-overlay absolute right-4 top-0 px-4 py-4 pb-8 w-96 rounded-md shadow-xl flex flex-col">
+            <div className="cart-overlay__header font-bold text-left border-b-2 pb-4">Cart</div>
+            <div className="cart-product-preview pt-8 h-full flex flex-col gap-8">
+              {isCartEmpty ? (
+                <div className="empty-cart-container font-bold flex items-center justify-center h-full">
+                  Your cart is empty
+                </div>
+              ) : (
+                <>
+                  <div className="cart-data-container flex gap-3 items-center justify-between">
+                    <div className="cart-left flex gap-3">
+                      <div className="cart-product-preview_img">
+                        <img
+                          src={ProductData[0].images[0].image}
+                          alt="product preview"
+                          className="cart-product-preview-img"
+                        />
+                      </div>
+
+                      <div className="cart-product-preview__info flex flex-col items-start justify-center">
+                        {ProductData[0].product_name}
+                        <div>
+                          {ProductData[0].price} x 3 <span className="cart-total">#375.00</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <img src={TrashIcon} alt="delete" className="cursor-pointer" />
+                  </div>
+
+                  <button className="cart-btn checkout-btn py-3 px-4 rounded-lg font-semibold  ">
+                    Checkout
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+        )}
+        {/* end cart overlay */}
       </main>
     </div>
   );

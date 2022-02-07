@@ -180,6 +180,23 @@ nav {
   display: none;
 }
 
+/* Cart overlay */
+.cart-overlay {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  background-color: white;
+  border-radius: 6px;
+  min-height: 15rem;
+}
+.cart-product-preview-img {
+  width: 65px;
+  border-radius: 8px;
+}
+.checkout-btn {
+  box-shadow: 0 12px 25px -17px hsl(26deg 100% 55%);
+}
+
 /* ============================ */
 /*      Tablet / Desktop       */
 /* =========================== */
