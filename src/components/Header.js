@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CompanyLogo from "../images/logo.svg";
 import CartIcon from "../images/icon-cart.svg";
 import CustomerIcon from "../images/image-avatar.png";
@@ -9,6 +9,26 @@ import Cart from "./Cart";
 
 const Header = ({ setIsCartOpen, isCartOpen, setCartItems, cartItems }) => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
+
+  // Prevent scrolling when mobile menu open
+  useEffect(() => {
+    if (isHamburgerMenuOpen) {
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+      // Prevent scrolling on mount
+      document.body.style.overflow = "hidden";
+      // Re-enable scrolling when component unmounts
+      return () => (document.body.style.overflow = originalStyle);
+    }
+  }, [isHamburgerMenuOpen]);
+
+  // Disable mobile menu on resize to tablet/desktop width
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 767) {
+        setIsHamburgerMenuOpen(false);
+      }
+    });
+  }, []);
 
   return (
     <header className="App-header flex justify-between md:border-b-2 md:border-slate-200	">
