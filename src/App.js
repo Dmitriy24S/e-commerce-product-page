@@ -1,25 +1,19 @@
 import { useState } from "react";
 import "./App.css";
-import HamburgerMenuIcon from "./images/icon-menu.svg";
-import HamburgerMenuCloseIcon from "./images/icon-close.svg";
 import { ReactComponent as CloseIcon } from "./images/icon-close.svg";
-import CompanyLogo from "./images/logo.svg";
-import CartIcon from "./images/icon-cart.svg";
-import CustomerIcon from "./images/image-avatar.png";
 import LeftArrow from "./images/icon-previous.svg";
 import RightArrow from "./images/icon-next.svg";
 import PlusIcon from "./images/icon-plus.svg";
 import MinusIcon from "./images/icon-minus.svg";
-import TrashIcon from "./images/icon-delete.svg";
 import { ProductData } from "./SliderImagesData";
+import Header from "./components/Header";
 
 function App() {
-  const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [cartAmount, setCartAmount] = useState(0);
   const [isImageFullscreen, setIsImageFullscreen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isCartEmpty, setIsCartEmpty] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
 
   const prevSlide = () => {
     setCurrentIndex(currentIndex === 0 ? ProductData[0].images.length - 1 : currentIndex - 1);
@@ -31,47 +25,12 @@ function App() {
   return (
     <div className="App">
       {/* Header */}
-      <header className="App-header flex justify-between">
-        {/* Left Header */}
-        <div
-          className={
-            isHamburgerMenuOpen
-              ? "show header-left flex items-center gap-4 pt-4 p-2 pb-5 sm:p-10 sm:pt-4 sm:pb-5 md:gap-10"
-              : "header-left flex items-center gap-4 p-2 pt-4 pb-5 sm:pt-4 sm:p-10 sm:pb-5 md:gap-10"
-          }
-        >
-          <button
-            className="z-20 border-none bg-transparent"
-            onClick={() => setIsHamburgerMenuOpen(!isHamburgerMenuOpen)}
-          >
-            {isHamburgerMenuOpen ? (
-              <img src={HamburgerMenuCloseIcon} alt="menu" />
-            ) : (
-              <img src={HamburgerMenuIcon} alt="menu" />
-            )}
-          </button>
-          <img src={CompanyLogo} alt="company logo" />
-          <nav className="fixed  h-screen top-0 left-0 p-10 pt-24 z-10 bg-white w-60 flex justify-center md:relative md:p-0 md:w-auto md:h-auto">
-            <ul className="flex flex-col gap-4 items-start font-bold md:flex-row md:font-normal md:gap-6">
-              <li>Collections</li>
-              <li>Men</li>
-              <li>Women</li>
-              <li>About</li>
-              <li>Contact</li>
-            </ul>
-          </nav>
-        </div>
-        {/* Right Header */}
-        <div className="header-right flex items-center gap-4 p-2 pt-4 pb-5 sm:p-10 sm:pt-4 sm:pb-5">
-          <img
-            src={CartIcon}
-            className="cursor-pointer"
-            alt="cart"
-            onClick={() => setIsCartOpen(!isCartOpen)}
-          />
-          <img src={CustomerIcon} alt="customer" className="w-6 cursor-pointer" />
-        </div>
-      </header>
+      <Header
+        setIsCartOpen={setIsCartOpen}
+        isCartOpen={isCartOpen}
+        cartItems={cartItems}
+        setCartItems={setCartItems}
+      />
 
       {/* Main */}
       <main className="relative">
@@ -100,6 +59,7 @@ function App() {
             {ProductData[0].images.map((image, index) => {
               return (
                 <div
+                  key={index}
                   className={
                     currentIndex === index
                       ? "product-thumbnail active-thumbnail cursor-pointer"
@@ -214,6 +174,7 @@ function App() {
               {ProductData[0].images.map((image, index) => {
                 return (
                   <div
+                    key={index}
                     className={
                       currentIndex === index
                         ? "product-thumbnail active-thumbnail cursor-pointer"
@@ -239,48 +200,6 @@ function App() {
           </div>
         )}
         {/* end fullscreen image overlay */}
-
-        {/* cart overlay */}
-        {isCartOpen && (
-          <div className="cart-overlay absolute right-4 top-0 px-4 py-4 pb-8 w-96 rounded-md shadow-xl flex flex-col">
-            <div className="cart-overlay__header font-bold text-left border-b-2 pb-4">Cart</div>
-            <div className="cart-product-preview pt-8 h-full flex flex-col gap-8">
-              {isCartEmpty ? (
-                <div className="empty-cart-container font-bold flex items-center justify-center h-full">
-                  Your cart is empty
-                </div>
-              ) : (
-                <>
-                  <div className="cart-data-container flex gap-3 items-center justify-between">
-                    <div className="cart-left flex gap-3">
-                      <div className="cart-product-preview_img">
-                        <img
-                          src={ProductData[0].images[0].image}
-                          alt="product preview"
-                          className="cart-product-preview-img"
-                        />
-                      </div>
-
-                      <div className="cart-product-preview__info flex flex-col items-start justify-center">
-                        {ProductData[0].product_name}
-                        <div>
-                          {ProductData[0].price} x 3 <span className="cart-total">#375.00</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <img src={TrashIcon} alt="delete" className="cursor-pointer" />
-                  </div>
-
-                  <button className="cart-btn checkout-btn py-3 px-4 rounded-lg font-semibold  ">
-                    Checkout
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-        )}
-        {/* end cart overlay */}
       </main>
     </div>
   );
