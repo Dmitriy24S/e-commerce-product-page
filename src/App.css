@@ -34,20 +34,12 @@ nav {
 header li {
   cursor: pointer;
 }
-header li:hover {
-  color: hsl(26deg 100% 55%);
-}
-.cart-icon:hover {
-  filter: brightness(0.5);
-}
 .customer-icon {
   outline: 2.5px solid transparent;
+  -webkit-border-radius: 50%;
   border-radius: 50%;
   -webkit-transition: outline 250ms ease-in-out;
   transition: outline 250ms ease-in-out;
-}
-.customer-icon:hover {
-  outline: 2.5px solid hsl(26deg 100% 55%);
 }
 
 /* Cart overlay */
@@ -237,9 +229,6 @@ header li:hover {
     cursor: pointer;
     border-bottom: 3px solid transparent;
   }
-  header li:hover {
-    border-bottom: 3px solid orange;
-  }
   main {
     display: flex;
     justify-content: center;
@@ -309,5 +298,22 @@ header li:hover {
   }
   .product-info {
     margin: 0;
+  }
+}
+
+@media (hover) {
+  header li:hover {
+    color: hsl(26deg 100% 55%);
+  }
+  .cart-icon:hover {
+    filter: brightness(0.5);
+  }
+  .customer-icon:hover {
+    outline: 2.5px solid hsl(26deg 100% 55%);
+  }
+  @media (min-width: 768px) {
+    header li:hover {
+      border-bottom: 3px solid orange;
+    }
   }
 }
