@@ -10,7 +10,7 @@ const Cart = ({ cartItems, setCartItems }) => {
   };
 
   return (
-    <div className="cart-overlay absolute w-80 right-0 top-0 px-4 py-4 pb-8 rounded-md shadow-xl flex flex-col sm:right-4 sm:w-96 ">
+    <div className="cart-overlay absolute w-80 right-0 top-0 px-4 py-4 pb-8 rounded-md shadow-xl flex flex-col sm:right-4 sm:w-96">
       <div className="cart-overlay__header font-bold text-left border-b-2 pb-4">Cart</div>
       <div className="cart-product-preview pt-8 h-full flex flex-col gap-8">
         {cartItems.length === 0 ? (

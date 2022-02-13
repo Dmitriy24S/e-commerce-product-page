@@ -10,7 +10,7 @@ import Cart from "./Cart";
 const Header = ({ setIsCartOpen, isCartOpen, setCartItems, cartItems }) => {
   const [isHamburgerMenuOpen, setIsHamburgerMenuOpen] = useState(false);
 
-  // Prevent scrolling when mobile menu open
+  // Prevent scrolling when mobile menu open - v1
   useEffect(() => {
     if (isHamburgerMenuOpen) {
       const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -20,6 +20,18 @@ const Header = ({ setIsCartOpen, isCartOpen, setCartItems, cartItems }) => {
       return () => (document.body.style.overflow = originalStyle);
     }
   }, [isHamburgerMenuOpen]);
+
+  // Prevent scrolling when mobile menu open - v2
+  //   useEffect(() => {
+  // if (isHamburgerMenuOpen) {
+  //   document.body.addEventListener("wheel", preventScroll, { passive: false });
+  //   function preventScroll(e) {
+  //     e.preventDefault();
+  //     e.stopPropagation();
+  //     return false;
+  //   }
+  // }
+  //   }, [isHamburgerMenuOpen]);
 
   // Disable mobile menu on resize to tablet/desktop width
   useEffect(() => {
@@ -40,6 +52,8 @@ const Header = ({ setIsCartOpen, isCartOpen, setCartItems, cartItems }) => {
             : "header-left flex items-center gap-4 px-2 sm:px-10 md:gap-10"
         }
       >
+        <div className="nav-dark-overlay" onClick={() => setIsHamburgerMenuOpen(false)}></div>
+
         <button
           className="z-20 border-none bg-transparent"
           onClick={() => setIsHamburgerMenuOpen(!isHamburgerMenuOpen)}
@@ -51,6 +65,7 @@ const Header = ({ setIsCartOpen, isCartOpen, setCartItems, cartItems }) => {
           )}
         </button>
         <img src={CompanyLogo} alt="company logo" />
+
         <nav className="fixed  h-screen top-0 left-0 p-10 pt-24 z-10 bg-white w-60 flex justify-center md:relative md:p-0 md:w-auto md:h-auto">
           <ul className="flex flex-col gap-4 items-start font-bold md:flex-row md:font-normal md:gap-6">
             <li>Collections</li>

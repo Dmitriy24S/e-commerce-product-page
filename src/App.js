@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import { ReactComponent as CloseIcon } from "./images/icon-close.svg";
 import LeftArrow from "./images/icon-previous.svg";
 import RightArrow from "./images/icon-next.svg";
 import PlusIcon from "./images/icon-plus.svg";
 import MinusIcon from "./images/icon-minus.svg";
 import { ProductData } from "./SliderImagesData";
 import Header from "./components/Header";
+import ProductFullscreenOverlay from "./components/ProductFullscreenOverlay";
+import ProductThumbnail from "./components/ProductThumbnail";
+import ProductImage from "./components/ProductImage";
 
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -22,8 +24,16 @@ function App() {
     setCurrentIndex(currentIndex === ProductData[0].images.length - 1 ? 0 : currentIndex + 1);
   };
 
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (window.innerWidth <= 767) {
+        setIsImageFullscreen(false);
+      }
+    });
+  }, []);
+
   return (
-    <div className="App">
+    <div className="App relative">
       {/* Header */}
       <Header
         setIsCartOpen={setIsCartOpen}
@@ -33,51 +43,51 @@ function App() {
       />
 
       {/* Main */}
-      <main className="relative">
+      <main>
+        {/* Fullscreen image overlay */}
+        {isImageFullscreen && (
+          <ProductFullscreenOverlay
+            setIsImageFullscreen={setIsImageFullscreen}
+            isImageFullscreen={isImageFullscreen}
+            ProductData={ProductData}
+            currentIndex={currentIndex}
+            setCurrentIndex={setCurrentIndex}
+            prevSlide={prevSlide}
+            nextSlide={nextSlide}
+          />
+        )}
+        {/* end fullscreen image overlay */}
+
         {/* image container */}
         <div className="image-container relative flex flex-col gap-4 overflow-hidden">
           <div className="arrow-wrapper">
+            {/* Image */}
             {ProductData[0].images.map((image, index) => {
               return (
-                <img
-                  src={process.env.PUBLIC_URL + image.image}
-                  alt="sneaker"
-                  className={
-                    currentIndex === index ? "block product-image md:cursor-pointer" : "hidden"
-                  }
+                <ProductImage
+                  image={image}
+                  currentIndex={currentIndex}
+                  index={index}
+                  setIsImageFullscreen={setIsImageFullscreen}
+                  isImageFullscreen={isImageFullscreen}
                   key={index}
-                  onClick={() => setIsImageFullscreen(!isImageFullscreen)}
                 />
               );
             })}
             <img src={LeftArrow} alt="left arrow" className="left-arrow" onClick={prevSlide} />
             <img src={RightArrow} alt="right arrow" className="right-arrow" onClick={nextSlide} />
           </div>
-
           {/* Thumbnails */}
           <div className="image-previews hidden md:flex md:gap-3 justify-center mb-4 mt-2">
             {ProductData[0].images.map((image, index) => {
               return (
-                <div
+                <ProductThumbnail
+                  currentIndex={currentIndex}
+                  index={index}
+                  setCurrentIndex={setCurrentIndex}
+                  image={image}
                   key={index}
-                  className={
-                    currentIndex === index
-                      ? "product-thumbnail active-thumbnail cursor-pointer"
-                      : "product-thumbnail cursor-pointer"
-                  }
-                  onClick={() => setCurrentIndex(index)}
-                >
-                  <img
-                    src={process.env.PUBLIC_URL + image.thumbnail}
-                    alt="sneaker preview"
-                    className={
-                      currentIndex === index
-                        ? "product-thumbnail active-thumbnail"
-                        : "product-thumbnail"
-                    }
-                    key={index}
-                  />
-                </div>
+                />
               );
             })}
           </div>
@@ -137,69 +147,6 @@ function App() {
           {/* end button container */}
         </div>
         {/* end product info */}
-
-        {/* Fullscreen image overlay */}
-        {isImageFullscreen && (
-          <div className="fullscreen-image-overlay">
-            <div className="wrapper">
-              <CloseIcon
-                className="fullscreen-img-close-btn2"
-                fill="white"
-                stroke="orange"
-                onClick={() => setIsImageFullscreen(!isImageFullscreen)}
-              />
-              {/* fullscreen image container */}
-              <div className="image-container relative flex flex-col gap-4 overflow-hidden">
-                {ProductData[0].images.map((image, index) => {
-                  return (
-                    <img
-                      src={process.env.PUBLIC_URL + image.image}
-                      alt="sneaker"
-                      className={currentIndex === index ? "block product-image" : "hidden"}
-                      key={index}
-                    />
-                  );
-                })}
-                <img src={LeftArrow} alt="left arrow" className="left-arrow" onClick={prevSlide} />
-                <img
-                  src={RightArrow}
-                  alt="right arrow"
-                  className="right-arrow"
-                  onClick={nextSlide}
-                />
-              </div>
-            </div>
-            {/* fullscreen thumbnails */}
-            <div className="image-previews hidden md:flex md:gap-3 justify-center mb-4 mt-2">
-              {ProductData[0].images.map((image, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={
-                      currentIndex === index
-                        ? "product-thumbnail active-thumbnail cursor-pointer"
-                        : "product-thumbnail cursor-pointer"
-                    }
-                    onClick={() => setCurrentIndex(index)}
-                  >
-                    <img
-                      src={process.env.PUBLIC_URL + image.thumbnail}
-                      alt="sneaker preview"
-                      className={
-                        currentIndex === index
-                          ? "product-thumbnail active-thumbnail"
-                          : "product-thumbnail"
-                      }
-                      key={index}
-                    />
-                  </div>
-                );
-              })}
-            </div>
-            {/* end fullscreen image container */}
-          </div>
-        )}
-        {/* end fullscreen image overlay */}
       </main>
     </div>
   );
