@@ -107,19 +107,31 @@ header li {
   position: absolute;
   top: 50%;
   left: 16px;
-  padding: 0.8rem 0.85rem;
   background: rgba(255, 255, 255, 0.922);
   border-radius: 50%;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+.left-arrow svg {
+  left: -2px;
+  position: relative;
 }
 .right-arrow {
   position: absolute;
   top: 50%;
   right: 16px;
-  padding: 0.8rem;
   background: rgba(255, 255, 255, 0.922);
   border-radius: 50%;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
 }
 
 /* Thumbnail */
@@ -242,6 +254,9 @@ header li {
 .content-wrapper {
   z-index: 101;
   position: relative;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .fullscreen-image-overlay .image-previews {
   z-index: 101;
@@ -384,13 +399,20 @@ header li {
     right: 0;
     opacity: 0.3;
   }
+  .product-thumbnail.active-thumbnail:hover:after {
+    opacity: 0.6;
+  }
   .left-arrow:hover,
   .right-arrow:hover {
-    background: rgba(255, 255, 255, 1);
+    background: rgba(255, 255, 255, 0.95);
+  }
+  .left-arrow:hover path,
+  .right-arrow:hover path {
+    stroke: hsl(26deg 100% 55%);
   }
   .fullscreen-img-close-btn:hover path {
-    stroke: goldenrod;
-    stroke: hsl(26deg 93% 74%);
+    stroke: hsl(26deg 100% 55%);
+    fill: hsl(26deg 100% 55%);
   }
   .amount-container button:hover:after {
     border-radius: 10px;
@@ -405,7 +427,6 @@ header li {
     right: 0;
     opacity: 0.3;
   }
-
   /* desktop nav hover */
   @media (min-width: 768px) {
     header li:hover {

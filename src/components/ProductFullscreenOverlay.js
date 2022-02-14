@@ -1,7 +1,7 @@
 import React from "react";
-import LeftArrow from "../images/icon-previous.svg";
-import RightArrow from "../images/icon-next.svg";
 import { ReactComponent as CloseIcon } from "../images/icon-close.svg";
+import { ReactComponent as RightArrow } from "../images/icon-next.svg";
+import { ReactComponent as LeftArrow } from "../images/icon-previous.svg";
 import ProductThumbnail from "./ProductThumbnail";
 import ProductImage from "./ProductImage";
 
@@ -39,8 +39,12 @@ const ProductFullscreenOverlay = ({
               />
             );
           })}
-          <img src={LeftArrow} alt="left arrow" className="left-arrow" onClick={prevSlide} />
-          <img src={RightArrow} alt="right arrow" className="right-arrow" onClick={nextSlide} />
+          <div className="left-arrow" onClick={prevSlide}>
+            <LeftArrow onClick={nextSlide} />
+          </div>
+          <div className="right-arrow" onClick={nextSlide}>
+            <RightArrow />
+          </div>
         </div>
       </div>
       {/* fullscreen thumbnails container*/}

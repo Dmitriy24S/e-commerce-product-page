@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import LeftArrow from "./images/icon-previous.svg";
-import RightArrow from "./images/icon-next.svg";
+import { ReactComponent as RightArrow } from "./images/icon-next.svg";
+import { ReactComponent as LeftArrow } from "./images/icon-previous.svg";
 import PlusIcon from "./images/icon-plus.svg";
 import MinusIcon from "./images/icon-minus.svg";
 import { ProductData } from "./SliderImagesData";
@@ -74,8 +74,12 @@ function App() {
                 />
               );
             })}
-            <img src={LeftArrow} alt="left arrow" className="left-arrow" onClick={prevSlide} />
-            <img src={RightArrow} alt="right arrow" className="right-arrow" onClick={nextSlide} />
+            <div className="left-arrow" onClick={prevSlide}>
+              <LeftArrow onClick={nextSlide} />
+            </div>
+            <div className="right-arrow" onClick={nextSlide}>
+              <RightArrow />
+            </div>
           </div>
           {/* Thumbnails */}
           <div className="image-previews hidden md:flex md:gap-3 justify-center mb-4 mt-2">
