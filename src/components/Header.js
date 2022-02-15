@@ -77,10 +77,10 @@ const Header = ({ setIsCartOpen, isCartOpen, setCartItems, cartItems }) => {
         </nav>
       </div>
       {/* Right side */}
-      <div className="header-right flex items-center gap-6 p-2 pt-4 pb-5 sm:p-10 sm:pt-4 sm:pb-5">
+      <div className="header-right flex items-center gap-6 px-2 pt-2 pb-2 sm:px-10 sm:pt-2 sm:pb-3">
         <img
           src={CartIcon}
-          className="cart-icon cursor-pointer transition"
+          className="cart-icon cursor-pointer p-1"
           alt="cart"
           onClick={() => setIsCartOpen(!isCartOpen)}
         />
