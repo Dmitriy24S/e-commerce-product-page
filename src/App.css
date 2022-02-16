@@ -89,6 +89,14 @@ header li {
   width: 65px;
   border-radius: 8px;
 }
+.cart-total-container {
+  display: flex;
+  gap: 0.5rem;
+}
+.delete-cart-icon {
+  padding: 0.7rem;
+  padding-right: 0.2rem;
+}
 .checkout-btn {
   box-shadow: 0 12px 25px -17px hsl(26deg 100% 55%);
 }
@@ -308,7 +316,7 @@ header li {
 /* =========================== */
 
 @media (min-width: 768px) {
-  .App-header button {
+  .App-header .nav-btn {
     display: none;
   }
   nav {
@@ -406,6 +414,9 @@ header li {
     color: hsl(26deg 100% 55%);
   }
   .cart-icon:hover {
+    filter: brightness(0.5);
+  }
+  .delete-cart-icon:hover {
     filter: brightness(0.5);
   }
   .customer-icon:hover {

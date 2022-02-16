@@ -2,17 +2,16 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import { ReactComponent as RightArrow } from "./images/icon-next.svg";
 import { ReactComponent as LeftArrow } from "./images/icon-previous.svg";
-import PlusIcon from "./images/icon-plus.svg";
-import MinusIcon from "./images/icon-minus.svg";
 import { ProductData } from "./SliderImagesData";
 import Header from "./components/Header";
 import ProductFullscreenOverlay from "./components/ProductFullscreenOverlay";
 import ProductThumbnail from "./components/ProductThumbnail";
 import ProductImage from "./components/ProductImage";
+import ProductInfo from "./components/ProductInfo";
 
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [cartAmount, setCartAmount] = useState(0);
+  const [cartAmount, setCartAmount] = useState(1);
   const [isImageFullscreen, setIsImageFullscreen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
@@ -101,54 +100,13 @@ function App() {
 
         {/* product info */}
         <div className="product-info text-left p-5 pt-4 flex flex-col gap-4 pb-10">
-          <div className="brand uppercase font-bold">{ProductData[0].brand}</div>
-          <div className="product-name font-bold text-3xl">
-            <h3>{ProductData[0].product_name}</h3>
-          </div>
-          <div className="product-description">
-            <p>{ProductData[0].description}</p>
-          </div>
-          {/* price container */}
-          <div className="price-container flex justify-between">
-            {ProductData[0].discount ? (
-              <>
-                <div className="discount-container flex gap-4 items-center">
-                  <div className="discounted-price font-bold text-3xl">
-                    {ProductData[0].discounted_price}
-                  </div>
-                  <div className="discount font-bold px-1.5 py-0.5 rounded-lg">
-                    {ProductData[0].discount}
-                  </div>
-                </div>
-                <div className="price font-bold line-through flex items-center ">
-                  {ProductData[0].price}
-                </div>
-              </>
-            ) : (
-              <div className="price">{ProductData[0].price}</div>
-            )}
-          </div>
-          {/* end price container */}
-          {/* button container  */}
-          <div className="btn-container flex flex-col gap-4 md:flex-row">
-            <div className="amount-container flex justify-between py-3 px-0 rounded-lg mt-2 gap-2 md:mt-0 md:min-w-fit">
-              <button
-                className="remove-amount-btn px-4 py-1"
-                onClick={() => setCartAmount(cartAmount > 0 ? cartAmount - 1 : 0)}
-              >
-                <img src={MinusIcon} alt="minus" />
-              </button>
-              <div className="amount-selected font-bold text-xl px-4 py-1">{cartAmount}</div>
-              <button
-                className="add-amount-btn px-4 py-1"
-                onClick={() => setCartAmount(cartAmount + 1)}
-              >
-                <img src={PlusIcon} alt="plus" />
-              </button>
-            </div>
-            <button className="cart-btn py-3 px-4 rounded-lg font-semibold  ">Add to cart</button>
-          </div>
-          {/* end button container */}
+          <ProductInfo
+            ProductData={ProductData}
+            cartAmount={cartAmount}
+            setCartAmount={setCartAmount}
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+          />
         </div>
         {/* end product info */}
       </main>

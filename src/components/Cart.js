@@ -36,8 +36,19 @@ const Cart = ({ cartItems, setCartItems }) => {
                       <div className="cart-product-preview__info flex flex-col items-start justify-center">
                         {product.name}
                         <div className="cart-total-container">
-                          {`$${product.price} x ${product.amount}`}
-                          <span className="cart-total font-bold">{`$${product.total}`}</span>
+                          {product.discounted_price ? (
+                            <>
+                              {`$${Number(product.discounted_price).toFixed(2)} x ${
+                                product.amount
+                              }`}
+                            </>
+                          ) : (
+                            <>{`$${Number(product.price).toFixed(2)} x ${product.amount}`}</>
+                          )}
+
+                          <span className="cart-total font-bold">{`$${Number(product.total).toFixed(
+                            2
+                          )}`}</span>
                         </div>
                       </div>
                     </div>
@@ -45,14 +56,14 @@ const Cart = ({ cartItems, setCartItems }) => {
                     <img
                       src={TrashIcon}
                       alt="delete"
-                      className="cursor-pointer"
+                      className="cursor-pointer delete-cart-icon"
                       onClick={() => deleteItem(product.name)}
                     />
                   </div>
                 </article>
               );
             })}
-            <button className="cart-btn checkout-btn py-3 px-4 rounded-lg font-semibold  ">
+            <button className="cart-btn checkout-btn py-3 px-4 rounded-lg font-semibold">
               Checkout
             </button>
           </>

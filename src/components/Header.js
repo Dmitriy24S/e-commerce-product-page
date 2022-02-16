@@ -53,9 +53,9 @@ const Header = ({ setIsCartOpen, isCartOpen, setCartItems, cartItems }) => {
         }
       >
         <div className="nav-dark-overlay" onClick={() => setIsHamburgerMenuOpen(false)}></div>
-
+        {/* Left side - nav menu btn*/}
         <button
-          className="z-20 border-none bg-transparent"
+          className="z-20 border-none bg-transparent nav-btn"
           onClick={() => setIsHamburgerMenuOpen(!isHamburgerMenuOpen)}
         >
           {isHamburgerMenuOpen ? (
@@ -64,8 +64,9 @@ const Header = ({ setIsCartOpen, isCartOpen, setCartItems, cartItems }) => {
             <img src={HamburgerMenuIcon} alt="menu" />
           )}
         </button>
+        {/* Left side - company logo */}
         <img src={CompanyLogo} alt="company logo" />
-
+        {/* Left side - nav menu */}
         <nav className="fixed  h-screen top-0 left-0 p-10 pt-24 z-10 bg-white w-60 flex justify-center md:relative md:p-0 md:w-auto md:h-auto">
           <ul className="flex flex-col gap-4 items-start font-bold md:flex-row md:font-normal md:gap-6">
             <li>Collections</li>
