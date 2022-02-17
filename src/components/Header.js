@@ -78,13 +78,22 @@ const Header = ({ setIsCartOpen, isCartOpen, setCartItems, cartItems }) => {
         </nav>
       </div>
       {/* Right side */}
-      <div className="header-right flex items-center gap-6 px-2 pt-2 pb-2 sm:px-10 sm:pt-2 sm:pb-2">
-        <img
-          src={CartIcon}
-          className="cart-icon cursor-pointer p-1"
-          alt="cart"
-          onClick={() => setIsCartOpen(!isCartOpen)}
-        />
+      <div className="header-right flex items-center gap-6 px-2 pt-2 pb-2 sm:px-10 sm:pt-2 sm:pb-2 ">
+        <div className="cart-container relative">
+          {cartItems.length > 0 && (
+            <div className="cart-amount-number">
+              {cartItems.map((item) => {
+                return item.amount;
+              })}
+            </div>
+          )}
+          <img
+            src={CartIcon}
+            className="cart-icon cursor-pointer p-1 relative"
+            alt="cart"
+            onClick={() => setIsCartOpen(!isCartOpen)}
+          />
+        </div>
         <img src={CustomerIcon} alt="customer" className="customer-icon w-8 cursor-pointer" />
       </div>
       {/* Cart overlay */}

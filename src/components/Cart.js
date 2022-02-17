@@ -34,8 +34,8 @@ const Cart = ({ cartItems, setCartItems }) => {
                       </div>
                       {/* cart product info */}
                       <div className="cart-product-preview__info flex flex-col items-start justify-center">
-                        {product.name}
-                        <div className="cart-total-container">
+                        <div className="cart-product__name">{product.name}</div>
+                        <div className="cart-product__total-container">
                           {product.discounted_price ? (
                             <>
                               {`$${Number(product.discounted_price).toFixed(2)} x ${
