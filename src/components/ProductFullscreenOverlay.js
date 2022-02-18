@@ -18,12 +18,16 @@ const ProductFullscreenOverlay = ({
     <div className="fullscreen-image-overlay">
       <div className="dark-overlay" onClick={() => setIsImageFullscreen(false)}></div>
       <div className="content-wrapper">
-        <CloseIcon
+        <a
+          href="#/"
           className="fullscreen-img-close-btn"
-          fill="white"
-          stroke="orange"
           onClick={() => setIsImageFullscreen(!isImageFullscreen)}
-        />
+        >
+          <span class="sr-only" aria-expanded="true">
+            Close overlay
+          </span>
+          <CloseIcon fill="white" stroke="orange" />
+        </a>
         {/* fullscreen image container */}
         <div className="image-container relative flex flex-col gap-4 overflow-hidden">
           {/* Image */}
@@ -39,12 +43,12 @@ const ProductFullscreenOverlay = ({
               />
             );
           })}
-          <div className="left-arrow" onClick={prevSlide}>
+          <a href="#/" className="left-arrow" onClick={prevSlide}>
             <LeftArrow onClick={nextSlide} />
-          </div>
-          <div className="right-arrow" onClick={nextSlide}>
+          </a>
+          <a href="#/" className="right-arrow" onClick={nextSlide}>
             <RightArrow />
-          </div>
+          </a>
         </div>
       </div>
       {/* fullscreen thumbnails container*/}

@@ -43,20 +43,6 @@ function App() {
 
       {/* Main */}
       <main>
-        {/* Fullscreen image overlay */}
-        {isImageFullscreen && (
-          <ProductFullscreenOverlay
-            setIsImageFullscreen={setIsImageFullscreen}
-            isImageFullscreen={isImageFullscreen}
-            ProductData={ProductData}
-            currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-            prevSlide={prevSlide}
-            nextSlide={nextSlide}
-          />
-        )}
-        {/* end fullscreen image overlay */}
-
         {/* image container */}
         <div className="image-container relative flex flex-col gap-4 overflow-hidden">
           <div className="arrow-wrapper">
@@ -73,12 +59,27 @@ function App() {
                 />
               );
             })}
-            <div className="left-arrow" onClick={prevSlide}>
+
+            {/* Fullscreen image overlay */}
+            {isImageFullscreen && (
+              <ProductFullscreenOverlay
+                setIsImageFullscreen={setIsImageFullscreen}
+                isImageFullscreen={isImageFullscreen}
+                ProductData={ProductData}
+                currentIndex={currentIndex}
+                setCurrentIndex={setCurrentIndex}
+                prevSlide={prevSlide}
+                nextSlide={nextSlide}
+              />
+            )}
+            {/* end fullscreen image overlay */}
+
+            <a href="#/" className="left-arrow" onClick={prevSlide}>
               <LeftArrow onClick={nextSlide} />
-            </div>
-            <div className="right-arrow" onClick={nextSlide}>
+            </a>
+            <a href="#/" className="right-arrow" onClick={nextSlide}>
               <RightArrow />
-            </div>
+            </a>
           </div>
           {/* Thumbnails */}
           <div className="image-previews hidden md:flex md:gap-3 justify-center mb-4 mt-2">

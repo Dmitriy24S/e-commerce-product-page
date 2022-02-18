@@ -52,13 +52,15 @@ const Cart = ({ cartItems, setCartItems }) => {
                         </div>
                       </div>
                     </div>
-
-                    <img
-                      src={TrashIcon}
-                      alt="delete"
-                      className="cursor-pointer delete-cart-icon"
-                      onClick={() => deleteItem(product.name)}
-                    />
+                    <a href="#/" className="delete-cart-icon-anchor">
+                      <span class="sr-only">Delete</span>
+                      <img
+                        src={TrashIcon}
+                        alt="delete"
+                        className="cursor-pointer delete-cart-icon"
+                        onClick={() => deleteItem(product.name)}
+                      />
+                    </a>
                   </div>
                 </article>
               );
