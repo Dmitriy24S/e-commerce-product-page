@@ -135,6 +135,13 @@ header li {
   overflow: hidden;
   width: -webkit-fill-available;
 }
+.cart-product__name,
+.cart-product__total-container {
+  color: hsl(219, 9%, 45%);
+}
+.cart-total {
+  color: hsl(220, 13%, 13%);
+}
 .cart-amount-number {
   position: absolute;
   z-index: 2;
@@ -154,6 +161,10 @@ header li {
 /* ==================== */
 /*        Main          */
 /* ==================== */
+
+main {
+  transition: all 250ms ease-in-out;
+}
 
 /* Image Slider */
 .image-container {
@@ -391,7 +402,6 @@ header li {
     justify-content: center;
     gap: 2rem;
     padding: 5rem 2rem;
-    transition: all 150ms ease-in-out;
   }
   main > * {
     width: 50%;
