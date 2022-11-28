@@ -1,4 +1,14 @@
-# Getting Started with Create React App
+# E-commerce product page
+
+![Design preview for the E-commerce product page](./design/desktop-preview.jpg)
+
+## Welcome 
+
+E-commerce product page (sneaker product page). Created with React, CSS and Tailwind CSS.
+
+[Live Demo](https://dmitriy24s.github.io/e-commerce-product-page/) 👈
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
